@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Luxury Stays</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003580;
+            --secondary: #0071c2;
+            --accent: #FFD700;
+            --light-bg: #f0f7ff;
+            --success: #4CAF50;
+            --dark: #222;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Contact Us Section */
+        .contact-us {
+            background: var(--light-bg);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-us::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .view-all {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        .view-all:hover {
+            color: var(--primary);
+            background: var(--light-bg);
+            transform: translateX(5px);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+        .contact-info {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+        }
+        .contact-info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        .contact-info p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        .contact-details {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .contact-details li:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        .contact-details li i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: flex-start;
+            gap: 25px;
+        }
+        .social-link {
+            color: var(--primary);
+            font-size: 1.4rem;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 113, 194, 0.1);
+        }
+        .social-link:hover {
+            color: var(--accent);
+            background: rgba(0, 113, 194, 0.2);
+            transform: translateY(-5px);
+        }
+        .contact-form {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+        }
+        .contact-form:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            background: #f9f9f9;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 113, 194, 0.2);
+            background: white;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .search-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 113, 194, 0.3);
+        }
+        .search-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 113, 194, 0.4);
+        }
+        .search-btn:active {
+            transform: translateY(0);
+        }
+        .contact-map {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+        }
+        .contact-map:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-us">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+                <a href="#" class="view-all"><i class="fas fa-arrow-right"></i> Get Directions</a>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions or need assistance? Reach out to our team—we’re here to help you plan your perfect stay!</p>
+                    <ul class="contact-details">
+                        <li><i class="fas fa-phone-alt"></i> +91 123-456-7890</li>
+                        <li><i class="fas fa-envelope"></i> support@luxurystays.in</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Lane, Mumbai, India</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject"><i class="fas fa-tag"></i> Subject</label>
+                            <input type="text" id="subject" name="subject" required placeholder="What’s on your mind?">
+                        </div>
+                        <div class="form-group">
+                            <label for="message"><i class="fas fa-comment"></i> Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us more..."></textarea>
+                        </div>
+                        <button type="submit" class="search-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-map">
+                    <div class="map-placeholder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609991263!2d72.74109995795607!3d19.08219783958279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sus!4v1635778332155!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <a href="file:///C:/Users/somul/OneDrive/Desktop/html%20project/hotelview.html">
+                        <button type="button">back</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Simulate form submission (replace with actual backend logic)
+            console.log('Form submitted:', { name, email, subject, message });
+
+            // Show confirmation
+            alert('Thank you, ' + name + '! Your message has been sent successfully. We’ll get back to you soon.');
+
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>

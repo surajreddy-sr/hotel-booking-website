@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking - Properties</title>
+    <style>
+        /* Full-screen styling with background image */
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .properties-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for readability */
+            border-radius: 12px;
+            margin: 20px;
+        }
+
+        .properties-container h1 {
+            font-size: 40px;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .property-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 25px;
+            object-fit: cover;
+            border: 2px solid #2980b9;
+        }
+
+        .property-content {
+            text-align: left;
+            flex: 1;
+        }
+
+        .property-content h2 {
+            font-size: 24px;
+            color: #2980b9;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+
+        .property-content p {
+            font-size: 16px;
+            color: #7f8c8d;
+            line-height: 1.8;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Properties Section -->
+    <div class="properties-container">
+        <h1>Properties</h1>
+        
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1618773928121-c3222925c79f?auto=format&fit=crop&w=100&q=80" alt="Room">
+            <div class="property-content">
+                <h2>Cozy Rooms</h2>
+                <p>Step into a world of comfort with our meticulously designed rooms, crafted to provide an unparalleled stay experience. Each room boasts premium bedding with hypoallergenic pillows, adjustable ambient lighting, and soundproof walls to ensure a peaceful night's sleep. Spacious layouts include modern furnishings, a work desk for business travelers, and large windows offering breathtaking views of the city or serene landscapes. Whether you're here for a quick getaway or an extended stay, our cozy rooms cater to every need, blending luxury with homely warmth.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1590673846749-570298a4e615?auto=format&fit=crop&w=100&q=80" alt="Wi-Fi">
+            <div class="property-content">
+                <h2>Free Wi-Fi</h2>
+                <p>Stay seamlessly connected with our complimentary high-speed Wi-Fi, available in every corner of the hotel. Designed to support multiple devices, our network ensures fast streaming, smooth video calls, and uninterrupted browsing—perfect for both leisure and work. Whether you're uploading vacation photos in the lobby, attending a virtual meeting from your room, or relaxing by the pool with your favorite show, our reliable internet keeps you online without any hidden fees. Experience connectivity that matches the pace of your lifestyle.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1551884831-bbf2818e50c2?auto=format&fit=crop&w=100&q=80" alt="Room Service">
+            <div class="property-content">
+                <h2>24/7 Room Service</h2>
+                <p>Indulge in the luxury of round-the-clock room service, tailored to your schedule and preferences. Our attentive staff is available 24/7 to deliver a wide range of offerings, from gourmet meals prepared by our chefs to late-night snacks or a refreshing beverage. Whether you’re craving breakfast in bed at dawn, a quick lunch between meetings, or a midnight treat, we ensure prompt delivery with a smile. Our service is designed to enhance your stay, making every moment as convenient and enjoyable as possible.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=100&q=80" alt="Pool">
+            <div class="property-content">
+                <h2>Swimming Pool</h2>
+                <p>Dive into relaxation at our stunning swimming pool, an oasis of tranquility amidst your busy travel schedule. Surrounded by lush landscaping and offering panoramic views, the pool area features comfortable loungers, shaded cabanas, and a poolside bar serving refreshing cocktails. Whether you’re swimming laps to stay active, soaking up the sun with a good book, or simply unwinding with family, our pool provides a luxurious escape. Maintained with the highest standards of cleanliness, it’s the perfect spot to recharge.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1517248135467-2c7ed3ab722d?auto=format&fit=crop&w=100&q=80" alt="Dining">
+            <div class="property-content">
+                <h2>Gourmet Dining</h2>
+                <p>Elevate your culinary experience with our on-site gourmet dining options, where every meal is a celebration of flavor. Our restaurant features a diverse menu crafted by award-winning chefs, showcasing local specialties alongside international dishes made with the freshest seasonal ingredients. Dine in an elegant setting with attentive service, or opt for a casual meal at our bistro. From hearty breakfasts to decadent dinners, we cater to all tastes, including vegetarian and gluten-free options, ensuring a memorable dining experience for every guest.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=100&q=80" alt="Gym">
+            <div class="property-content">
+                <h2>Fitness Center</h2>
+                <p>Maintain your fitness goals in our fully equipped fitness center, open to all guests at no extra cost. Featuring cutting-edge cardio machines, free weights, and strength-training equipment, the gym is designed for both casual workouts and intense sessions. Natural light floods the space, creating an invigorating atmosphere, while complimentary towels and water stations keep you refreshed. Whether you’re a morning jogger or an evening lifter, our 24/7 access ensures you can exercise on your terms, keeping wellness a priority during your stay.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=100&q=80" alt="Location">
+            <div class="property-content">
+                <h2>Prime Location</h2>
+                <p>Discover the advantage of our prime location, placing you at the heart of the city’s best offerings. Just minutes away from iconic landmarks, vibrant shopping districts, and efficient public transportation, our hotel makes exploration effortless. Whether you’re visiting for business and need proximity to corporate hubs or here to enjoy cultural attractions, our strategic position saves you time and enhances your experience. Step outside and immerse yourself in the energy of the surroundings, then return to the comfort of our luxurious retreat.</p>
+            </div>
+        </div>
+
+        <div class="property-item">
+            <img src="https://images.unsplash.com/photo-1527792491860-13f6153d9945?auto=format&fit=crop&w=100&q=80" alt="Staff">
+            <div class="property-content">
+                <h2>Top Staff</h2>
+                <p>Experience hospitality at its finest with our exceptional staff, trained to anticipate your every need. From the moment you arrive, our team greets you with warmth and professionalism, ensuring a smooth check-in and personalized assistance throughout your stay. Whether it’s arranging transportation, recommending local hotspots, or fulfilling special requests, our multilingual staff is dedicated to your satisfaction. Their attention to detail and genuine care transform your visit into an unforgettable journey of comfort and delight.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

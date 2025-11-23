@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Hotels in Goa | Premium Beach Resorts</title>
+    <style>
+        :root {
+            --primary: #006241;
+            --secondary: #00a859;
+            --accent: #FFD700;
+            --light-bg: #f0fff5;
+            --dark: #222;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 32px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        .section {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        .section h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-bg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2 i {
+            color: var(--accent);
+        }
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        .card-badge.premium {
+            background: linear-gradient(135deg, var(--accent), #ffcc00);
+        }
+        .card-badge.discount {
+            background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+            color: white;
+        }
+        .card-badge.beachfront {
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+            color: white;
+        }
+        .card-image {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        .card-content {
+            padding: 25px;
+        }
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+        .card:hover h3 {
+            color: var(--secondary);
+        }
+        .card-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        .rating-stars {
+            color: var(--accent);
+        }
+        .rating-count {
+            color: #666;
+            font-size: 14px;
+        }
+        .card-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .amenity {
+            background: var(--light-bg);
+            color: var(--secondary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .card-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 20px 0;
+        }
+        .card-price .original-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        .card-price .discount {
+            color: #ff4d4d;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .book-btn {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 168, 89, 0.3);
+        }
+        .book-btn:hover {
+            background: linear-gradient(135deg, var(--primary), #008a4a);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 168, 89, 0.4);
+        }
+        .book-btn:active {
+            transform: translateY(0);
+        }
+        .view-all {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .view-all-btn {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .view-all-btn:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 168, 89, 0.2);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <i class="fas fa-umbrella-beach"></i> Luxury Beach Resorts in Darjeeling
+        </div>
+    </div>
+    <div class="section">
+        <h2><i class="fas fa-crown"></i> Premium Resort Collection</h2>
+        <div class="hotel-grid">
+            <!-- Taj Exotica Resort & Spa -->
+            <div class="card">
+                <div class="card-badge premium">Premium</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Taj Exotica Resort & Spa">
+                </div>
+                <div class="card-content">
+                    <h3>Taj Exotica Resort & Spa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Benaulim, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-count">(1,876 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Private Beach</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> 3 Restaurants</span>
+                    </div>
+                    <div class="card-price">
+                        <span class="original-price">₹25,000</span> ₹21,500 <span class="discount">(14% OFF)</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- The Leela Goa -->
+            <div class="card">
+                <div class="card-badge beachfront">Beachfront</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="The Leela Goa">
+                </div>
+                <div class="card-content">
+                    <h3>The Leela Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Cavelossim, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(1,542 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                        <span class="amenity"><i class="fas fa-golf-ball"></i> Golf Course</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹18,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grand Hyatt Goa -->
+            <div class="card">
+                <div class="card-badge discount">Limited Deal</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Grand Hyatt Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Grand Hyatt Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Bambolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-count">(1,234 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-water"></i> River View</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        <span class="original-price">₹20,000</span> ₹16,500 <span class="discount">(17% OFF)</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- W Goa -->
+            <div class="card">
+                <div class="card-badge premium">Luxury</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="W Goa">
+                </div>
+                <div class="card-content">
+                    <h3>W Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Vagator, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(987 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-cocktail"></i> Beach Club</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-dumbbell"></i> Gym</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹22,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Taj Fort Aguada Resort -->
+            <div class="card">
+                <div class="card-badge beachfront">Beachfront</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Taj Fort Aguada Resort">
+                </div>
+                <div class="card-content">
+                    <h3>Taj Fort Aguada Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(1,654 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-water"></i> Sea View</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹19,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ITC Grand Goa -->
+            <div class="card">
+                <div class="card-badge">Business</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ITC Grand Goa">
+                </div>
+                <div class="card-content">
+                    <h3>ITC Grand Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Arossim, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-count">(1,321 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-shuttle-van"></i> Airport Shuttle</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹17,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Alila Diwa Goa -->
+            <div class="card">
+                <div class="card-badge premium">Luxury</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Alila Diwa Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Alila Diwa Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Majorda, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <span class="rating-count">(1,089 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-tree"></i> Paddy Fields</span>
+                        <span class="amenity"><i class="fas fa-concierge-bell"></i> Butler Service</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹20,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Park Hyatt Goa -->
+            <div class="card">
+                <div class="card-badge beachfront">Beachfront</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Park Hyatt Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Park Hyatt Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Arossim Beach, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(1,432 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Private Beach</span>
+                        <span class="amenity"><i class="fas fa-golf-ball"></i> Golf Course</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹23,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Novotel Goa Resort -->
+            <div class="card">
+                <div class="card-badge discount">Family Deal</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Novotel Goa Resort">
+                </div>
+                <div class="card-content">
+                    <h3>Novotel Goa Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(876 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-child"></i> Kids Club</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        <span class="original-price">₹15,000</span> ₹12,500 <span class="discount">(16% OFF)</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Radisson Blu Resort Goa -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Radisson Blu Resort Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Radisson Blu Resort Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Cavelossim, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(1,023 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-water"></i> River View</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹14,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Holiday Inn Resort Goa -->
+            <div class="card">
+                <div class="card-badge">Family</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Holiday Inn Resort Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Holiday Inn Resort Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(765 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-child"></i> Kids Activities</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹11,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- The Lalit Golf & Spa Resort -->
+            <div class="card">
+                <div class="card-badge premium">Golf Resort</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="The Lalit Golf & Spa Resort">
+                </div>
+                <div class="card-content">
+                    <h3>The Lalit Golf & Spa Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Canacona, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(987 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-golf-ball"></i> 18-Hole Golf</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹18,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kenilworth Resort & Spa -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kenilworth Resort & Spa">
+                </div>
+                <div class="card-content">
+                    <h3>Kenilworth Resort & Spa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Utorda, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(654 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹13,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ramada Caravela Beach Resort -->
+            <div class="card">
+                <div class="card-badge beachfront">Beachfront</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ramada Caravela Beach Resort">
+                </div>
+                <div class="card-content">
+                    <h3>Ramada Caravela Beach Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Varca, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(876 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Private Beach</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹15,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Zuri White Sands Resort -->
+            <div class="card">
+                <div class="card-badge discount">Weekend Deal</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Zuri White Sands Resort">
+                </div>
+                <div class="card-content">
+                    <h3>Zuri White Sands Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Varca, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(765 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                        <span class="amenity"><i class="fas fa-cocktail"></i> Beach Bar</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        <span class="original-price">₹14,000</span> ₹11,200 <span class="discount">(20% OFF)</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hard Rock Hotel Goa -->
+            <div class="card">
+                <div class="card-badge">Entertainment</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hard Rock Hotel Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Hard Rock Hotel Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(1,098 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-music"></i> Live Music</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹16,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lemon Tree Amarante Beach Resort -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lemon Tree Amarante Beach Resort">
+                </div>
+                <div class="card-content">
+                    <h3>Lemon Tree Amarante Beach Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(543 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹10,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- The O Hotel -->
+            <div class="card">
+                <div class="card-badge">Boutique</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="The O Hotel">
+                </div>
+                <div class="card-content">
+                    <h3>The O Hotel</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(432 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-water"></i> River View</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹12,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Vivanta Goa, Panaji -->
+            <div class="card">
+                <div class="card-badge">City</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vivanta Goa, Panaji">
+                </div>
+                <div class="card-content">
+                    <h3>Vivanta Goa, Panaji</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Panaji, Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(654 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-water"></i> Mandovi River</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹13,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Goa Marriott Resort & Spa -->
+            <div class="card">
+                <div class="card-badge beachfront">Beachfront</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Goa Marriott Resort & Spa">
+                </div>
+                <div class="card-content">
+                    <h3>Goa Marriott Resort & Spa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Miramar, Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(876 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹16,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bogmallo Beach Resort -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bogmallo Beach Resort">
+                </div>
+                <div class="card-content">
+                    <h3>Bogmallo Beach Resort</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Bogmallo, Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(432 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Beach Access</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹9,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- The Fern Kadamba Hotel -->
+            <div class="card">
+                <div class="card-badge">Eco-Friendly</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="The Fern Kadamba Hotel">
+                </div>
+                <div class="card-content">
+                    <h3>The Fern Kadamba Hotel</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Panaji, Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(543 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-leaf"></i> Eco-Certified</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹8,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fortune Select Acron Regina -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fortune Select Acron Regina">
+                </div>
+                <div class="card-content">
+                    <h3>Fortune Select Acron Regina</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(321 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                        <span class="amenity"><i class="fas fa-shuttle-van"></i> Shuttle Service</span>
+                    </div>
+                    <div class="card-price">
+                        ₹7,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- The Crown Goa -->
+            <div class="card">
+                <div class="card-badge">Boutique</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="The Crown Goa">
+                </div>
+                <div class="card-content">
+                    <h3>The Crown Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(432 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹9,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lemon Tree Hotel, Candolim -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lemon Tree Hotel, Candolim">
+                </div>
+                <div class="card-content">
+                    <h3>Lemon Tree Hotel, Candolim</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(321 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                        <span class="amenity"><i class="fas fa-parking"></i> Free Parking</span>
+                    </div>
+                    <div class="card-price">
+                        ₹8,000 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Holiday Inn Express Goa -->
+            <div class="card">
+                <div class="card-badge discount">Smart Deal</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Holiday Inn Express Goa">
+                </div>
+                <div class="card-content">
+                    <h3>Holiday Inn Express Goa</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Candolim, North Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                        <span class="rating-count">(432 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                        <span class="amenity"><i class="fas fa-coffee"></i> Breakfast</span>
+                    </div>
+                    <div class="card-price">
+                        <span class="original-price">₹9,000</span> ₹7,200 <span class="discount">(20% OFF)</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- The Zuri White Sands -->
+            <div class="card">
+                <div class="card-badge beachfront">Beachfront</div>
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="The Zuri White Sands">
+                </div>
+                <div class="card-content">
+                    <h3>The Zuri White Sands</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt"></i> Varca, South Goa
+                    </div>
+                    <div class="card-rating">
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span class="rating-count">(765 reviews)</span>
+                    </div>
+                    <div class="card-amenities">
+                        <span class="amenity"><i class="fas fa-umbrella-beach"></i> Private Beach</span>
+                        <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                        <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                    </div>
+                    <div class="card-price">
+                        ₹14,500 <span>/ night</span>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="view-all">
+            <button class="view-all-btn">
+                View All 25+ Luxury Resorts in Goa <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced booking functionality
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.card');
+                const hotelName = card.querySelector('h3').textContent;
+                const price = card.querySelector('.card-price').textContent;
+                const location = card.querySelector('.card-location').textContent;
+                
+                // Create booking modal
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+                modal.style.opacity = '0';
+                modal.style.transition = 'opacity 0.3s';
+                
+                // Modal content
+                modal.innerHTML = `
+                    <div style="background: white; padding: 30px; border-radius: 16px; max-width: 500px; width: 90%; position: relative;">
+                        <button style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+                        <h2 style="color: var(--primary); margin-top: 0;">Book ${hotelName}</h2>
+                        <p><i class="fas fa-map-marker-alt"></i> ${location}</p>
+                        <p><strong>Price:</strong> ${price}</p>
+                        
+                        <form style="margin-top: 20px;">
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Check-in Date</label>
+                                <input type="date" id="checkinDate" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" required>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Check-out Date</label>
+                                <input type="date" id="checkoutDate" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;" required>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 600;">Guests</label>
+                                <select id="guests" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                                    <option>1 Adult</option>
+                                    <option>2 Adults</option>
+                                    <option>Family (2 Adults + 2 Children)</option>
+                                </select>
+                            </div>
+                            <button type="button" id="confirmBookingBtn" style="background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;" 
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)'" 
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                <i class="fas fa-lock"></i> Confirm Booking
+                            </button>
+                        </form>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                setTimeout(() => { modal.style.opacity = '1'; }, 10);
+                
+                // Close modal
+                modal.querySelector('button').addEventListener('click', () => {
+                    modal.style.opacity = '0';
+                    setTimeout(() => { modal.remove(); }, 300);
+                });
+                
+                // Add event listener for confirm booking button
+                modal.querySelector('#confirmBookingBtn').addEventListener('click', function() {
+                    const checkinDate = modal.querySelector('#checkinDate').value;
+                    const checkoutDate = modal.querySelector('#checkoutDate').value;
+                    const guests = modal.querySelector('#guests').value;
+                    
+                    if (!checkinDate || !checkoutDate) {
+                        alert('Please select both check-in and check-out dates');
+                        return;
+                    }
+                    
+                    // Generate receipt content
+                    const receiptContent = `
+                        Luxury Resorts Goa - Booking Confirmation
+                        ========================================
+                        
+                        Resort: ${hotelName}
+                        Location: ${location}
+                        Price: ${price}
+                        
+                        Check-in Date: ${checkinDate}
+                        Check-out Date: ${checkoutDate}
+                        Guests: ${guests}
+                        
+                        Booking Reference: GOA-${Math.floor(100000 + Math.random() * 900000)}
+                        Booking Date: ${new Date().toLocaleDateString()}
+                        
+                        Thank you for your booking!
+                        For any queries, contact: support@luxuryresortsgoa.com
+                    `;
+                    
+                    // Create download link for receipt
+                    const blob = new Blob([receiptContent], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Booking_${hotelName.replace(/\s+/g, '_')}_${new Date().getTime()}.txt`;
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    // Cleanup
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    }, 0);
+                    
+                    // Close modal after download
+                    modal.style.opacity = '0';
+                    setTimeout(() => { 
+                        modal.remove(); 
+                        alert('Booking confirmed! Your receipt has been downloaded.');
+                    }, 300);
+                });
+            });
+        });
+        
+        // View all button animation
+        document.querySelector('.view-all-btn').addEventListener('mouseover', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+        document.querySelector('.view-all-btn').addEventListener('mouseout', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>

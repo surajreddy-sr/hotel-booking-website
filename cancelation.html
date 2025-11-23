@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Cancellation Policy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --border-radius: 8px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .policy-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .policy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .policy-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 2rem);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 2rem);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-date {
+            float: right;
+        }
+
+        .timeline-circle {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            border: 4px solid white;
+            z-index: 1;
+        }
+
+        .refund-calculator {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        button i {
+            margin-right: 0.5rem;
+        }
+
+        .result-container {
+            background: rgba(39, 174, 96, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .result-title i {
+            margin-right: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .faq-section {
+            margin: 3rem 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            background: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            background: #f8f9fa;
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-question {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .notice-box {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .notice-icon {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-date {
+                float: none;
+            }
+
+            .timeline-circle {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -10px;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="file:///C:/Users/somul/OneDrive/Desktop/html%20project/hotelview.html">
+            <button type="button">back</button></a>
+        <header>
+            
+            <h1>Cancellation Policy</h1>
+            <p>Understand our flexible booking options and cancellation terms</p>
+        </header>
+
+        <div class="policy-card">
+            <h2>Our Cancellation Policy</h2>
+            <p>We understand that plans can change, which is why we offer flexible cancellation options for most of our bookings. Below you'll find detailed information about our cancellation terms, refund eligibility, and important deadlines.</p>
+            
+            <div class="policy-features">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Flexible Options</h3>
+                        <p>Choose from different cancellation policies when you book to suit your travel plans.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Partial Refunds</h3>
+                        <p>Depending on when you cancel, you may be eligible for a partial refund.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Free Cancellation</h3>
+                        <p>Cancel for free up to 48 hours before check-in for most bookings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Cancellation Timeline</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-circle"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">More than 30 days before check-in</div>
+                    <h3>Full Refund</h3>
+                    <p>Receive 100% of your payment back if you cancel more than 30 days before your scheduled check-in date.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-circle"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">15-30 days before check-in</div>
+                    <h3>75% Refund</h3>
+                    <p>Cancel during this period to receive 75% of your payment back.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-circle"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">7-14 days before check-in</div>
+                    <h3>50% Refund</h3>
+                    <p>Half of your payment will be refunded if you cancel within this window.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-circle"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">48 hours - 6 days before check-in</div>
+                    <h3>25% Refund</h3>
+                    <p>A quarter of your payment will be refunded for cancellations during this period.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-circle"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Less than 48 hours before check-in</div>
+                    <h3>No Refund</h3>
+                    <p>Cancellations within 48 hours of check-in are not eligible for a refund.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="refund-calculator">
+            <h2>Refund Calculator</h2>
+            <p>Estimate how much you'll get back based on your cancellation date.</p>
+            
+            <form id="calculatorForm" class="calculator-form">
+                <div class="form-group">
+                    <label for="bookingAmount">Booking Amount ($)</label>
+                    <input type="number" id="bookingAmount" min="0" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkInDate">Check-in Date</label>
+                    <input type="date" id="checkInDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cancellationDate">Cancellation Date</label>
+                    <input type="date" id="cancellationDate" required>
+                </div>
+                
+                <button type="submit" id="calculateBtn">
+                    <i class="fas fa-calculator"></i> Calculate Refund
+                </button>
+            </form>
+            
+            <div id="resultContainer" class="result-container">
+                <h3 class="result-title">
+                    <i class="fas fa-coins"></i> Estimated Refund
+                </h3>
+                <div id="resultValue" class="result-value">$0.00</div>
+                <p id="resultDetails" style="margin-top: 0.5rem;"></p>
+            </div>
+        </div>
+
+        <div class="notice-box">
+            <div class="notice-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div>
+                <h3>Important Notice</h3>
+                <p>Special events, peak seasons, and non-refundable rates may have different cancellation policies. Please check your booking confirmation for specific terms applicable to your reservation.</p>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I cancel my booking?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>You can cancel your booking by logging into your account on our website or mobile app, navigating to "My Bookings," selecting the reservation you wish to cancel, and following the cancellation prompts. Alternatively, you can contact our customer service team for assistance.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How long does it take to receive my refund?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Refunds are typically processed within 7-10 business days after cancellation. However, it may take additional time for the refund to appear on your credit card statement, depending on your bank's processing times.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I modify my booking instead of canceling?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, in most cases you can modify your booking (change dates, room type, etc.) without canceling. Modifications may be subject to rate differences and availability. There's usually no fee for modifications made outside the cancellation window.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What if I need to cancel due to an emergency?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We understand that emergencies happen. In cases of documented emergencies (medical, death in family, etc.), we may offer more flexible cancellation options. Please contact our customer service team with supporting documentation as soon as possible.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Are there any non-refundable booking options?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we sometimes offer discounted non-refundable rates. These will be clearly marked during the booking process and in your confirmation email. Non-refundable bookings cannot be canceled or changed for any reason.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Luxury Stays Hotel Group. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum dates for date inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkInDate').min = today;
+            document.getElementById('cancellationDate').min = today;
+            
+            // Refund calculator functionality
+            const calculatorForm = document.getElementById('calculatorForm');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultValue = document.getElementById('resultValue');
+            const resultDetails = document.getElementById('resultDetails');
+            
+            calculatorForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const bookingAmount = parseFloat(document.getElementById('bookingAmount').value);
+                const checkInDate = new Date(document.getElementById('checkInDate').value);
+                const cancellationDate = new Date(document.getElementById('cancellationDate').value);
+                
+                if (isNaN(bookingAmount)) {
+                    alert('Please enter a valid booking amount');
+                    return;
+                }
+                
+                if (cancellationDate >= checkInDate) {
+                    alert('Cancellation date must be before check-in date');
+                    return;
+                }
+                
+                const daysBeforeCheckIn = Math.floor((checkInDate - cancellationDate) / (1000 * 60 * 60 * 24));
+                let refundPercentage = 0;
+                let policyText = '';
+                
+                if (daysBeforeCheckIn > 30) {
+                    refundPercentage = 100;
+                    policyText = 'Full refund (100%) for cancellations more than 30 days before check-in';
+                } else if (daysBeforeCheckIn > 14) {
+                    refundPercentage = 75;
+                    policyText = '75% refund for cancellations 15-30 days before check-in';
+                } else if (daysBeforeCheckIn > 6) {
+                    refundPercentage = 50;
+                    policyText = '50% refund for cancellations 7-14 days before check-in';
+                } else if (daysBeforeCheckIn > 1) {
+                    refundPercentage = 25;
+                    policyText = '25% refund for cancellations 2-6 days before check-in';
+                } else {
+                    refundPercentage = 0;
+                    policyText = 'No refund for cancellations within 48 hours of check-in';
+                }
+                
+                const refundAmount = (bookingAmount * refundPercentage / 100).toFixed(2);
+                
+                resultValue.textContent = `$${refundAmount}`;
+                resultDetails.textContent = `Canceling ${daysBeforeCheckIn} days before check-in: ${policyText}`;
+                resultContainer.classList.add('show');
+            });
+            
+            // FAQ accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    faqItem.classList.toggle('active');
+                    
+                    // Close other open FAQs
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== question && otherQuestion.parentElement.classList.contains('active')) {
+                            otherQuestion.parentElement.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Animation on scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.policy-card, .feature-item, .timeline-item, .refund-calculator, .faq-item');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state for animation
+            document.querySelectorAll('.policy-card, .feature-item, .timeline-item, .refund-calculator, .faq-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            window.addEventListener('load', animateOnScroll);
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>

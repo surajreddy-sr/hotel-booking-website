@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking - Terms of Service</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-color: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .tos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .tos-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tos-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tos-header .version {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tos-header .last-updated {
+            font-style: italic;
+            color: #95a5a6;
+        }
+
+        .tos-sidebar {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .tos-sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tos-nav {
+            list-style: none;
+        }
+
+        .tos-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tos-nav a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .tos-nav a:hover, .tos-nav a.active {
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+        }
+
+        .tos-nav a.active {
+            font-weight: 600;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .tos-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .tos-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 20px;
+        }
+
+        .tos-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tos-section h3 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .tos-section p {
+            margin-bottom: 1rem;
+        }
+
+        .tos-section ul, .tos-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tos-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background-color: #fffde7;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .tos-footer {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .acceptance-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .acceptance-box input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .acceptance-box label {
+            font-weight: 500;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--light-color);
+        }
+
+        .print-btn {
+            margin-left: auto;
+            margin-right: 15px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .tos-container {
+                grid-template-columns: 1fr;
+            }
+
+            .tos-sidebar {
+                position: static;
+                max-height: none;
+            }
+
+            .tos-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .print-btn {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .tos-sidebar, .tos-footer {
+                display: none;
+            }
+
+            .tos-container {
+                grid-template-columns: 1fr;
+                padding: 0;
+            }
+
+            .tos-content {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            body {
+                background: white;
+                font-size: 12pt;
+            }
+        }
+
+        /* Animation for section highlighting */
+        @keyframes highlight {
+            0% { background-color: #fffde7; }
+            100% { background-color: white; }
+        }
+
+        .tos-section.highlighted {
+            animation: highlight 2s ease;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="tos-container">
+        <header class="tos-header">
+            <h1>Terms of Service</h1>
+            <div class="version">Version 3.2.1</div>
+            <div class="last-updated">Last updated: <span id="last-updated-date">June 15, 2023</span></div>
+        </header>
+
+        <aside class="tos-sidebar">
+            <h3>Table of Contents</h3>
+            <ul class="tos-nav">
+                <li><a href="#introduction" class="active">1. Introduction</a></li>
+                <li><a href="#definitions">2. Definitions</a></li>
+                <li><a href="#account-registration">3. Account Registration</a></li>
+                <li><a href="#bookings-reservations">4. Bookings & Reservations</a></li>
+                <li><a href="#cancellations-refunds">5. Cancellations & Refunds</a></li>
+                <li><a href="#payments-fees">6. Payments & Fees</a></li>
+                <li><a href="#property-rules">7. Property Rules</a></li>
+                <li><a href="#liability">8. Liability</a></li>
+                <li><a href="#privacy">9. Privacy</a></li>
+                <li><a href="#modifications">10. Modifications</a></li>
+                <li><a href="#governing-law">11. Governing Law</a></li>
+            </ul>
+        </aside>
+
+        <main class="tos-content">
+            <section id="introduction" class="tos-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to our hotel booking platform ("Platform"). These Terms of Service ("Terms") govern your access to and use of our website, mobile applications, and services (collectively, the "Services").</p>
+                <p>By accessing or using our Services, you agree to be bound by these Terms and our <a href="#">Privacy Policy</a>. If you do not agree to these Terms, you may not use our Services.</p>
+                <p>These Terms constitute a legally binding agreement between you and [Hotel Booking Company] ("we," "us," or "our").</p>
+            </section>
+
+            <section id="definitions" class="tos-section">
+                <h2>2. Definitions</h2>
+                <p>For the purposes of these Terms:</p>
+                <ul>
+                    <li><strong>"Booking"</strong> means a reservation made through our Platform for accommodation services.</li>
+                    <li><strong>"Guest"</strong> means any individual who makes a Booking or stays at a property booked through our Platform.</li>
+                    <li><strong>"Property"</strong> means the hotel, resort, or other accommodation facility available for Booking through our Platform.</li>
+                    <li><strong>"Service Fee"</strong> means the fee we charge for use of our Platform, as displayed during the booking process.</li>
+                </ul>
+            </section>
+
+            <section id="account-registration" class="tos-section">
+                <h2>3. Account Registration</h2>
+                <p>To access certain features of our Services, you may be required to create an account.</p>
+                
+                <h3>3.1 Account Information</h3>
+                <p>You must provide accurate, current, and complete information during registration and keep your account information updated.</p>
+                
+                <h3>3.2 Account Security</h3>
+                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. Notify us immediately of any unauthorized use of your account.</p>
+                
+                <h3>3.3 Eligibility</h3>
+                <p>Our Services are available only to individuals who are at least 18 years old and capable of forming legally binding contracts.</p>
+            </section>
+
+            <section id="bookings-reservations" class="tos-section">
+                <h2>4. Bookings & Reservations</h2>
+                <p>Our Platform allows you to search for and book Properties.</p>
+                
+                <h3>4.1 Booking Process</h3>
+                <p>When you make a Booking, you enter into a direct contract with the Property. We act solely as an intermediary between you and the Property.</p>
+                
+                <h3>4.2 Booking Confirmation</h3>
+                <p>A Booking is confirmed only when you receive a confirmation email from us with a booking reference number.</p>
+                
+                <h3>4.3 Pricing & Availability</h3>
+                <p>All prices are subject to availability and may change without notice until a Booking is confirmed. We are not responsible for pricing errors.</p>
+            </section>
+
+            <section id="cancellations-refunds" class="tos-section">
+                <h2>5. Cancellations & Refunds</h2>
+                <p>Cancellation policies vary by Property and rate type.</p>
+                
+                <h3>5.1 Cancellation by Guest</h3>
+                <p>To cancel a Booking, you must follow the cancellation procedure outlined in your confirmation email. Cancellation fees may apply as specified at the time of Booking.</p>
+                
+                <h3>5.2 Cancellation by Property</h3>
+                <p>In the rare event a Property cancels a confirmed Booking, we will attempt to find you comparable accommodation or provide a full refund.</p>
+                
+                <h3>5.3 Refunds</h3>
+                <p>Refunds, when applicable, will be processed to the original payment method within 7-10 business days.</p>
+            </section>
+
+            <section id="payments-fees" class="tos-section">
+                <h2>6. Payments & Fees</h2>
+                <p>You agree to pay all charges incurred in connection with your Booking.</p>
+                
+                <h3>6.1 Payment Methods</h3>
+                <p>We accept major credit cards and other payment methods as displayed during checkout. Some Properties may require a credit card guarantee.</p>
+                
+                <h3>6.2 Service Fees</h3>
+                <p>Our Service Fee is non-refundable except as required by law.</p>
+                
+                <h3>6.3 Taxes</h3>
+                <p>You are responsible for all applicable taxes, which will be displayed during checkout.</p>
+            </section>
+
+            <section id="property-rules" class="tos-section">
+                <h2>7. Property Rules</h2>
+                <p>You agree to comply with all Property rules and regulations during your stay.</p>
+                
+                <h3>7.1 Check-in/Check-out</h3>
+                <p>Standard check-in and check-out times will be specified in your confirmation. Early check-in or late check-out may be available for an additional fee.</p>
+                
+                <h3>7.2 Damages</h3>
+                <p>You are responsible for any damage to the Property caused by you or your guests during your stay.</p>
+                
+                <h3>7.3 Conduct</h3>
+                <p>Disruptive behavior may result in immediate termination of your stay without refund.</p>
+            </section>
+
+            <section id="liability" class="tos-section">
+                <h2>8. Liability</h2>
+                <p class="highlight">To the maximum extent permitted by law, we disclaim all liability for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of our Services.</p>
+                
+                <h3>8.1 Property Conditions</h3>
+                <p>We do not guarantee the accuracy of Property descriptions or amenities. Property conditions may change without notice.</p>
+                
+                <h3>8.2 Third-Party Services</h3>
+                <p>We are not responsible for services provided by third parties, including but not limited to transportation, activities, or dining.</p>
+            </section>
+
+            <section id="privacy" class="tos-section">
+                <h2>9. Privacy</h2>
+                <p>Your privacy is important to us. Our <a href="#">Privacy Policy</a> explains how we collect, use, and protect your personal information.</p>
+                
+                <h3>9.1 Data Sharing</h3>
+                <p>We share necessary information with Properties to fulfill your Booking. By making a Booking, you consent to this data sharing.</p>
+            </section>
+
+            <section id="modifications" class="tos-section">
+                <h2>10. Modifications</h2>
+                <p>We reserve the right to modify these Terms at any time. We will notify you of significant changes through our Platform or by email.</p>
+                
+                <h3>10.1 Continued Use</h3>
+                <p>Your continued use of our Services after changes become effective constitutes acceptance of the modified Terms.</p>
+            </section>
+
+            <section id="governing-law" class="tos-section">
+                <h2>11. Governing Law</h2>
+                <p>These Terms shall be governed by and construed in accordance with the laws of the State of [State], without regard to its conflict of law provisions.</p>
+                
+                <h3>11.1 Dispute Resolution</h3>
+                <p>Any disputes arising under these Terms shall be resolved through binding arbitration in [City, State] in accordance with the rules of the American Arbitration Association.</p>
+            </section>
+        </main>
+
+        <footer class="tos-footer">
+            <div class="acceptance-box">
+                <input type="checkbox" id="accept-tos">
+                <label for="accept-tos">I have read and agree to the Terms of Service</label>
+            </div>
+            <button class="btn print-btn btn-outline" id="print-btn">Print Terms</button>
+           <a href="file:///C:/Users/somul/OneDrive/Desktop/html%20project/hotelview.html"><button class="btn" id="continue-btn"  disabled>Continue</button></a> 
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const navLinks = document.querySelectorAll('.tos-nav a');
+            const sections = document.querySelectorAll('.tos-section');
+            const acceptCheckbox = document.getElementById('accept-tos');
+            const continueBtn = document.getElementById('continue-btn');
+            const printBtn = document.getElementById('print-btn');
+            const lastUpdatedDate = document.getElementById('last-updated-date');
+
+            // Set current date for "last updated"
+            const currentDate = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            lastUpdatedDate.textContent = currentDate.toLocaleDateString('en-US', options);
+
+            // Smooth scrolling for navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Add highlight animation
+                    targetSection.classList.add('highlighted');
+                    setTimeout(() => {
+                        targetSection.classList.remove('highlighted');
+                    }, 2000);
+                });
+            });
+
+            // Intersection Observer for active nav highlighting
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.6
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Terms acceptance toggle
+            acceptCheckbox.addEventListener('change', function() {
+                continueBtn.disabled = !this.checked;
+            });
+
+            // Continue button action
+            continueBtn.addEventListener('click', function() {
+                alert('Thank you for accepting our Terms of Service. You may now proceed with your booking.');
+                // In a real implementation, this would redirect to the booking page
+                // window.location.href = '/booking';
+            });
+
+            // Print functionality
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            // Highlight important terms when printed
+            const highlights = document.querySelectorAll('.highlight');
+            printBtn.addEventListener('click', function() {
+                highlights.forEach(el => {
+                    el.style.backgroundColor = '#fffde7';
+                    el.style.padding = '2px 4px';
+                });
+            });
+
+            // Track which sections have been viewed
+            const viewedSections = new Set();
+            
+            observer.takeRecords = function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        if (!viewedSections.has(sectionId)) {
+                            viewedSections.add(sectionId);
+                            console.log(`User viewed section: ${sectionId}`);
+                            // In a real implementation, you might send this to analytics
+                        }
+                    }
+                });
+            };
+        });
+    </script>
+</body>
+</html>

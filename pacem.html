@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Form</title>
+    <script>
+        function my(){
+            alert("YOU HAVE SUCCESSFULLY BOOKED IN PACEM HOTELS")
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+        #booking {
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            width: 350px;
+            position: absolute;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #booking h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #ffd700;
+            outline: none;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        .reservation-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .reservation-form h2 {
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .room-availability {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .room-availability table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .room-availability th, .room-availability td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .room-availability th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="file:///C:/Users/somul/OneDrive/Desktop/html%20project/ourservice.html">OUR SERVICES</a></li>
+                <li><a href="#gallery">GALLERY</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Booking Form Section -->
+    <section class="reservation-form">
+        <h2>Book a Room</h2>
+        <form id="bookingForm" onsubmit="my()">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="roomType">Room Type:</label>
+                <select id="roomType" required>
+                    <option value="single">Single Room</option>
+                    <option value="double">Double Room</option>
+                    <option value="suite">Suite</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="checkIn">Check-in Date:</label>
+                <input type="date" id="checkIn" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkOut">Check-out Date:</label>
+                <input type="date" id="checkOut" required>
+            </div>
+
+            <button type="submit">Book Now</button>
+        </form>
+    </section>
+
+    <!-- Room Availability Section -->
+    <section class="room-availability">
+        <h2>Room Availability</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room Type</th>
+                    <th>Availability</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Single Room</td>
+                    <td id="singleRoomAvailability">Available</td>
+                </tr>
+                <tr>
+                    <td>Double Room</td>
+                    <td id="doubleRoomAvailability">Available</td>
+                </tr>
+                <tr>
+                    <td>Suite</td>
+                    <td id="suiteRoomAvailability">Available</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hotel Management System</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking FAQ</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .faq-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .faq-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .faq-header p {
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-search {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .faq-search input {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .faq-search input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .faq-search button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .faq-search button:hover {
+            background: #2980b9;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .faq-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-question h3 {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+
+        .faq-question .icon {
+            min-width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question .icon {
+            background: var(--secondary-color);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 20px;
+        }
+
+        .faq-answer-inner {
+            padding: 20px 0;
+        }
+
+        .faq-item .category-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background: var(--light-color);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #7f8c8d;
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        .no-results img {
+            max-width: 200px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .faq-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .faq-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation for when items appear */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faq-item {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        /* Delay animations for each item */
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+        .faq-item:nth-child(5) { animation-delay: 0.5s; }
+        .faq-item:nth-child(6) { animation-delay: 0.6s; }
+        .faq-item:nth-child(7) { animation-delay: 0.7s; }
+        .faq-item:nth-child(8) { animation-delay: 0.8s; }
+        .faq-item:nth-child(9) { animation-delay: 0.9s; }
+        .faq-item:nth-child(10) { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <div class="faq-container">
+        <div class="faq-header">
+            <h1>Hotel Booking FAQs</h1>
+            <p>Find answers to common questions about reservations, cancellations, amenities, and more for your perfect stay.</p>
+        </div>
+
+        <div class="faq-search">
+            <input type="text" id="faq-search-input" placeholder="Search FAQs...">
+            <button id="faq-search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="faq-categories">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="reservation">Reservations</button>
+            <button class="category-btn" data-category="cancellation">Cancellations</button>
+            <button class="category-btn" data-category="amenities">Amenities</button>
+            <button class="category-btn" data-category="payment">Payments</button>
+            <button class="category-btn" data-category="checkin">Check-in/out</button>
+        </div>
+        <a href="file:///C:/Users/somul/OneDrive/Desktop/html%20project/hotelview.html">
+            <button type="button">back</button></a>
+
+        <div class="faq-items" id="faq-items-container">
+            <!-- FAQ items will be dynamically inserted here -->
+        </div>
+
+        <div class="no-results" id="no-results">
+            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" alt="No results">
+            <h3>No FAQs found</h3>
+            <p>Try adjusting your search or filter to find what you're looking for.</p>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Data
+            const faqs = [
+                {
+                    question: "How do I make a reservation?",
+                    answer: "You can make a reservation through our website, mobile app, or by calling our reservation center. Online bookings receive a 5% discount. Ensure you have your payment method and identification details ready when booking.",
+                    category: "reservation"
+                },
+                {
+                    question: "What is your cancellation policy?",
+                    answer: "Cancellations made more than 48 hours before check-in receive a full refund. Cancellations within 48 hours incur a one-night charge. No-shows will be charged the full reservation amount. Some special rates may have different policies.",
+                    category: "cancellation"
+                },
+                {
+                    question: "Can I modify my reservation after booking?",
+                    answer: "Yes, you can modify your reservation through our website or app up to 24 hours before check-in. Changes are subject to availability and rate differences. For major changes, please contact our reservation team directly.",
+                    category: "reservation"
+                },
+                {
+                    question: "What payment methods do you accept?",
+                    answer: "We accept all major credit cards (Visa, MasterCard, American Express, Discover), debit cards, and mobile payments (Apple Pay, Google Pay). Cash payments are accepted at the property but require a credit card for incidentals.",
+                    category: "payment"
+                },
+                {
+                    question: "What time is check-in and check-out?",
+                    answer: "Standard check-in is at 3:00 PM and check-out is at 11:00 AM. Early check-in and late check-out may be available upon request for an additional fee, subject to availability.",
+                    category: "checkin"
+                },
+                {
+                    question: "Do you offer free WiFi?",
+                    answer: "Yes, we provide complimentary high-speed WiFi throughout the property for all guests. Premium WiFi with higher speeds is available for business guests at an additional charge.",
+                    category: "amenities"
+                },
+                {
+                    question: "Is parking available at the hotel?",
+                    answer: "We offer both valet parking ($35/night) and self-parking ($25/night) options. Electric vehicle charging stations are available at no extra cost for guests using our parking facilities.",
+                    category: "amenities"
+                },
+                {
+                    question: "Are pets allowed?",
+                    answer: "We welcome pets up to 50 lbs for a $75 non-refundable cleaning fee per stay. A maximum of 2 pets per room is allowed. Service animals are always welcome at no charge with proper documentation.",
+                    category: "amenities"
+                },
+                {
+                    question: "What COVID-19 safety measures are in place?",
+                    answer: "We follow all local health guidelines with enhanced cleaning protocols, contactless check-in options, and hand sanitizer stations throughout the property. Our staff is fully vaccinated and masks are available upon request.",
+                    category: "amenities"
+                },
+                {
+                    question: "Do you have accessible rooms?",
+                    answer: "Yes, we offer ADA-compliant rooms with roll-in showers, visual alarms, and other accessibility features. Please indicate your specific needs when booking to ensure we accommodate you properly.",
+                    category: "amenities"
+                },
+                {
+                    question: "Can I get a receipt for my stay?",
+                    answer: "An itemized receipt will be emailed to you automatically upon check-out. You can also request a copy at the front desk or through our website up to 60 days after your stay.",
+                    category: "payment"
+                },
+                {
+                    question: "What is your smoking policy?",
+                    answer: "All rooms and indoor public areas are 100% non-smoking. A $250 cleaning fee will be charged for smoking in rooms. Designated outdoor smoking areas are available.",
+                    category: "amenities"
+                },
+                {
+                    question: "Do you offer room service?",
+                    answer: "Room service is available daily from 7:00 AM to 10:00 PM. A 18% service charge and $4 delivery fee will be added to all orders. Our full menu is available through the in-room tablet or hotel app.",
+                    category: "amenities"
+                },
+                {
+                    question: "What happens if I arrive after the front desk closes?",
+                    answer: "Our front desk is staffed 24/7. For properties with limited hours, late arrivals will receive detailed instructions for key collection via email after booking.",
+                    category: "checkin"
+                },
+                {
+                    question: "Can I store my luggage after check-out?",
+                    answer: "Yes, we offer complimentary luggage storage for hotel guests on the day of arrival and departure. Extended storage may be available for a small fee - please inquire with the concierge.",
+                    category: "checkin"
+                }
+            ];
+
+            // DOM Elements
+            const faqContainer = document.getElementById('faq-items-container');
+            const searchInput = document.getElementById('faq-search-input');
+            const searchBtn = document.getElementById('faq-search-btn');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const noResults = document.getElementById('no-results');
+
+            // Current filter state
+            let currentCategory = 'all';
+            let currentSearchTerm = '';
+
+            // Initialize FAQ
+            function initFAQ() {
+                renderFAQs(faqs);
+                setupEventListeners();
+            }
+
+            // Render FAQs based on current filters
+            function renderFAQs(faqsToRender) {
+                faqContainer.innerHTML = '';
+                
+                const filteredFAQs = filterFAQs(faqsToRender);
+                
+                if (filteredFAQs.length === 0) {
+                    noResults.classList.add('show');
+                    return;
+                }
+                
+                noResults.classList.remove('show');
+                
+                filteredFAQs.forEach((faq, index) => {
+                    const faqItem = document.createElement('div');
+                    faqItem.className = 'faq-item';
+                    faqItem.dataset.category = faq.category;
+                    
+                    faqItem.innerHTML = `
+                        <div class="faq-question">
+                            <h3>${faq.question}</h3>
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <div class="faq-answer-inner">
+                                    <p>${faq.answer}</p>
+                                    <span class="category-tag">${faq.category}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    faqContainer.appendChild(faqItem);
+                    
+                    // Add click event to toggle answer
+                    const questionEl = faqItem.querySelector('.faq-question');
+                    questionEl.addEventListener('click', () => {
+                        faqItem.classList.toggle('active');
+                        
+                        // Close other open FAQs when opening a new one
+                        if (faqItem.classList.contains('active')) {
+                            document.querySelectorAll('.faq-item.active').forEach(openItem => {
+                                if (openItem !== faqItem) {
+                                    openItem.classList.remove('active');
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Filter FAQs based on current category and search term
+            function filterFAQs(faqsToFilter) {
+                return faqsToFilter.filter(faq => {
+                    const matchesCategory = currentCategory === 'all' || faq.category === currentCategory;
+                    const matchesSearch = currentSearchTerm === '' || 
+                        faq.question.toLowerCase().includes(currentSearchTerm) || 
+                        faq.answer.toLowerCase().includes(currentSearchTerm);
+                    
+                    return matchesCategory && matchesSearch;
+                });
+            }
+
+            // Highlight search terms in FAQ text
+            function highlightText(text, searchTerm) {
+                if (!searchTerm) return text;
+                
+                const regex = new RegExp(searchTerm, 'gi');
+                return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+            }
+
+            // Set up event listeners
+            function setupEventListeners() {
+                // Search functionality
+                searchBtn.addEventListener('click', handleSearch);
+                searchInput.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') {
+                        handleSearch();
+                    }
+                });
+                
+                // Category filter
+                categoryBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        categoryBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        currentCategory = btn.dataset.category;
+                        renderFAQs(faqs);
+                    });
+                });
+            }
+
+            // Handle search
+            function handleSearch() {
+                currentSearchTerm = searchInput.value.trim().toLowerCase();
+                renderFAQs(faqs);
+            }
+
+            // Initialize the FAQ
+            initFAQ();
+        });
+    </script>
+</body>
+</html>

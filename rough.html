@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Chatbot</title>
+    <style>
+        /* Chatbot Container Styles */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        #chatbot-container.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Chatbot Header */
+        .chatbot-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .close-chat:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Chat Messages Area */
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background-color: #e6e6e6;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background-color: #1e3c72;
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+        
+        /* Chat Input Area */
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+            background-color: white;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+        
+        .chat-input input:focus {
+            border-color: #1e3c72;
+        }
+        
+        .send-button {
+            background-color: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .send-button:hover {
+            background-color: #2a5298;
+        }
+        
+        /* Quick Reply Buttons */
+        .quick-reply-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #eee;
+        }
+        
+        .quick-reply-buttons button {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quick-reply-buttons button:hover {
+            background-color: #1e3c72;
+            color: white;
+            border-color: #1e3c72;
+        }
+        
+        /* Chatbot Toggle Button */
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #1e3c72;
+            color: white;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        
+        #chatbot-toggle:hover {
+            background-color: #2a5298;
+            transform: scale(1.1);
+        }
+        
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            align-self: flex-start;
+            padding: 10px 15px;
+            background-color: #e6e6e6;
+            border-radius: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #666;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        /* Date picker suggestion */
+        .date-suggestion {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .date-option {
+            background-color: white;
+            border: 1px solid #1e3c72;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .date-option:hover {
+            background-color: #1e3c72;
+            color: white;
+        }
+        
+        /* Room options */
+        .room-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .room-option:hover {
+            border-color: #1e3c72;
+            background-color: #f0f5ff;
+        }
+        
+        .room-option h4 {
+            margin: 0 0 5px 0;
+            color: #1e3c72;
+        }
+        
+        .room-features {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .room-price {
+            font-weight: bold;
+            color: #2a5298;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle">💬</button>
+    
+    <!-- Chatbot Container -->
+    <div id="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Hotel Booking Assistant</h3>
+            <button class="close-chat">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be added here dynamically -->
+        </div>
+        <div class="quick-reply-buttons">
+            <button data-query="room availability">Check Availability</button>
+            <button data-query="current promotions">Special Offers</button>
+            <button data-query="room types">Room Types</button>
+            <button data-query="contact">Contact Hotel</button>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ask about rooms, rates, or amenities...">
+            <button class="send-button" id="send-button">→</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const closeChat = document.querySelector('.close-chat');
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            const quickReplyButtons = document.querySelectorAll('.quick-reply-buttons button');
+            
+            // Show/hide chatbot
+            chatbotToggle.addEventListener('click', function() {
+                chatbotContainer.classList.toggle('active');
+            });
+            
+            closeChat.addEventListener('click', function() {
+                chatbotContainer.classList.remove('active');
+            });
+            
+            // Send message function
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addMessage(message, 'user');
+                    userInput.value = '';
+                    simulateTyping();
+                    setTimeout(() => {
+                        botResponse(message);
+                    }, 1000);
+                }
+            }
+            
+            // Quick reply buttons
+            quickReplyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const query = this.getAttribute('data-query');
+                    addMessage(query, 'user');
+                    simulateTyping();
+                    setTimeout(() => {
+                        botResponse(query);
+                    }, 1000);
+                });
+            });
+            
+            // Enter key to send
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Send button click
+            sendButton.addEventListener('click', sendMessage);
+            
+            // Add message to chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', sender + '-message');
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Show typing indicator
+            function simulateTyping() {
+                const typingDiv = document.createElement('div');
+                typingDiv.classList.add('typing-indicator');
+                typingDiv.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                return typingDiv;
+            }
+            
+            // Remove typing indicator
+            function removeTyping(typingDiv) {
+                if (typingDiv && typingDiv.parentNode) {
+                    typingDiv.parentNode.removeChild(typingDiv);
+                }
+            }
+            
+            // Bot response logic
+            function botResponse(userMessage) {
+                const typingDiv = document.querySelector('.typing-indicator');
+                removeTyping(typingDiv);
+                
+                const lowerMessage = userMessage.toLowerCase();
+                let response = '';
+                
+                // Room availability
+                if (lowerMessage.includes('availability') || lowerMessage.includes('available')) {
+                    response = `We have several room types available. Here are your options:`;
+                    
+                    // Add room options
+                    setTimeout(() => {
+                        const roomOptions = document.createElement('div');
+                        roomOptions.innerHTML = `
+                            <div class="room-option" onclick="selectRoom('Standard Room')">
+                                <h4>Standard Room</h4>
+                                <div class="room-features">1 King Bed • 320 sq ft • Free WiFi</div>
+                                <div class="room-price">$199 per night</div>
+                            </div>
+                            <div class="room-option" onclick="selectRoom('Deluxe Room')">
+                                <h4>Deluxe Room</h4>
+                                <div class="room-features">1 King Bed • 450 sq ft • City View</div>
+                                <div class="room-price">$259 per night</div>
+                            </div>
+                            <div class="room-option" onclick="selectRoom('Junior Suite')">
+                                <h4>Junior Suite</h4>
+                                <div class="room-features">1 King Bed • 650 sq ft • Separate Living Area</div>
+                                <div class="room-price">$349 per night</div>
+                            </div>
+                            <p style="margin-top:10px;">Would you like to check availability for specific dates?</p>
+                            <div class="date-suggestion">
+                                <div class="date-option" onclick="checkDates('this weekend')">This Weekend</div>
+                                <div class="date-option" onclick="checkDates('next week')">Next Week</div>
+                                <div class="date-option" onclick="checkDates('next month')">Next Month</div>
+                            </div>
+                        `;
+                        chatMessages.appendChild(roomOptions);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 300);
+                }
+                // Room types
+                else if (lowerMessage.includes('room') && (lowerMessage.includes('type') || lowerMessage.includes('kind'))) {
+                    response = `We offer three main room types:
+                    
+1. <b>Standard Room</b> - Comfortable accommodations with all basic amenities
+2. <b>Deluxe Room</b> - Spacious rooms with premium views and upgraded furnishings
+3. <b>Junior Suite</b> - Our most luxurious option with separate living areas
+
+Would you like details about any specific room type?`;
+                }
+                // Pricing
+                else if (lowerMessage.includes('price') || lowerMessage.includes('rate') || lowerMessage.includes('cost')) {
+                    response = `Our current rates vary by room type and season:
+                    
+• Standard Room: $199-$249 per night
+• Deluxe Room: $259-$299 per night
+• Junior Suite: $349-$399 per night
+
+We also offer special packages and discounts for extended stays. Would you like information about any current promotions?`;
+                }
+                // Promotions
+                else if (lowerMessage.includes('promo') || lowerMessage.includes('discount') || lowerMessage.includes('offer') || lowerMessage.includes('special')) {
+                    response = `We currently have these special offers available:
+                    
+🎉 <b>Weekend Getaway</b> - 15% off stays of 2+ nights (Friday-Sunday)
+🌴 <b>Extended Stay</b> - 20% off stays of 7+ nights
+💖 <b>Honeymoon Package</b> - Champagne & spa credit included
+
+Would you like me to check if any of these are available for your travel dates?`;
+                }
+                // Amenities
+                else if (lowerMessage.includes('amenity') || lowerMessage.includes('feature') || lowerMessage.includes('facility')) {
+                    response = `Our hotel offers these amenities:
+                    
+• Free high-speed WiFi
+• 24-hour fitness center
+• Rooftop pool with panoramic views
+• On-site restaurant & bar
+• Full-service spa
+• Business center
+• Concierge services
+
+Is there any specific amenity you'd like more information about?`;
+                }
+                // Cancellation policy
+                else if (lowerMessage.includes('cancel') || lowerMessage.includes('refund')) {
+                    response = `Our cancellation policy is as follows:
+                    
+• Free cancellation up to 48 hours before check-in
+• Late cancellation (within 48 hours): 1 night charge
+• No-shows will be charged the full stay amount
+
+Some special rates may have different policies. Would you like me to check the policy for a specific reservation?`;
+                }
+                // Contact
+                else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email')) {
+                    response = `You can reach us through:
+                    
+📞 Phone: +1 (555) 123-4567
+📧 Email: reservations@yourhotel.com
+📍 Address: 123 Hospitality Ave, Cityville
+
+Our front desk is available 24/7 to assist you. Is there anything specific you'd like help with?`;
+                }
+                // Default response
+                else {
+                    response = `I'm here to help with your hotel booking needs. You can ask me about:
+                    
+• Room availability and types
+• Pricing and special offers
+• Hotel amenities and services
+• Reservation modifications
+• Cancellation policies
+
+What would you like to know?`;
+                }
+                
+                addMessage(response, 'bot');
+            }
+            
+            // Make functions available globally for HTML onclick handlers
+            window.selectRoom = function(roomType) {
+                addMessage(`I'm interested in the ${roomType}`, 'user');
+                simulateTyping();
+                setTimeout(() => {
+                    const typingDiv = document.querySelector('.typing-indicator');
+                    removeTyping(typingDiv);
+                    addMessage(`Great choice! The ${roomType} is one of our most popular options. Would you like to check availability for specific dates or proceed with a booking?`, 'bot');
+                }, 1000);
+            };
+            
+            window.checkDates = function(dateRange) {
+                addMessage(`I want to check ${dateRange}`, 'user');
+                simulateTyping();
+                setTimeout(() => {
+                    const typingDiv = document.querySelector('.typing-indicator');
+                    removeTyping(typingDiv);
+                    addMessage(`I've checked availability for ${dateRange}. We have rooms available in all categories. Would you like me to help you make a reservation?`, 'bot');
+                }, 1500);
+            };
+            
+            // Initial bot greeting when chatbot is opened
+            chatbotToggle.addEventListener('click', function() {
+                if (chatMessages.children.length === 0) {
+                    setTimeout(() => {
+                        addMessage("Hello! I'm your hotel booking assistant. How can I help you today?", 'bot');
+                    }, 500);
+                }
+            }, {once: true});
+        });
+    </script>
+</body>
+</html>

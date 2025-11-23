@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotel Booking Help Center</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #2d5be3;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header input {
+      margin-top: 1rem;
+      padding: 0.6rem;
+      width: 90%;
+      max-width: 400px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .faq-section h2,
+    .contact-support h2 {
+      margin-bottom: 1rem;
+      color: #2d5be3;
+    }
+
+    .faq {
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 1rem;
+      background-color: #e7efff;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 1rem;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .contact-support form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-support input,
+    .contact-support textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-support button {
+      padding: 0.8rem;
+      background-color: #2d5be3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact-support button:hover {
+      background-color: #1e3ebf;
+    }
+
+    @media (max-width: 600px) {
+      header input {
+        width: 100%;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    
+
+  <header>
+    <a href="file:///C:/Users/somul/OneDrive/Desktop/html%20project/hotelview.html">
+        <button type="button">back</button></a>
+    <h1>Hotel Booking Help Center</h1>
+    <p>How can we help you today?</p>
+    <input type="text" id="searchInput" placeholder="Search help topics..." />
+  </header>
+
+  <main>
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq" data-question="How to book a hotel?">
+        <button class="faq-question">How to book a hotel?</button>
+        <div class="faq-answer">
+          <p>To book a hotel, search your destination, choose dates, and confirm with payment.</p>
+        </div>
+      </div>
+
+      <div class="faq" data-question="Can I cancel a reservation?">
+        <button class="faq-question">Can I cancel a reservation?</button>
+        <div class="faq-answer">
+          <p>Yes, go to 'My Bookings' and click 'Cancel'. Refund depends on cancellation policy.</p>
+        </div>
+      </div>
+
+      <div class="faq" data-question="How to contact customer support?">
+        <button class="faq-question">How to contact customer support?</button>
+        <div class="faq-answer">
+          <p>You can use the form below or call us 24/7 at 1800-000-000.</p>
+        </div>
+      </div>
+
+      <div class="faq" data-question="What payment methods are accepted?">
+        <button class="faq-question">What payment methods are accepted?</button>
+        <div class="faq-answer">
+          <p>We accept credit/debit cards, UPI, net banking, and wallets like Paytm & PhonePe.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-support">
+      <h2>Contact Support</h2>
+      <form id="supportForm">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Describe your issue..." rows="5" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Toggle FAQ
+    const faqButtons = document.querySelectorAll('.faq-question');
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const isOpen = answer.style.display === 'block';
+        document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+        answer.style.display = isOpen ? 'none' : 'block';
+      });
+    });
+
+    // Search Functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const faqs = document.querySelectorAll('.faq');
+
+      faqs.forEach(faq => {
+        const question = faq.getAttribute('data-question').toLowerCase();
+        faq.style.display = question.includes(query) ? 'block' : 'none';
+      });
+    });
+
+    // Handle form submission
+    document.getElementById('supportForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Support request submitted. We’ll get back to you soon!');
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

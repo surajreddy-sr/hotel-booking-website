@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacem Hotel - Luxury Redefined</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap">
+    <style>
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Services Section */
+        #services {
+            padding: 50px 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+  
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+         
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bed"></i>
+                </div>
+                <h3>Luxurious Rooms</h3>
+                <p>Experience the ultimate comfort with our spacious and elegantly designed rooms, equipped with modern amenities.</p>
+            </div>
+
+         
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Fine Dining</h3>
+                <p>Indulge in a culinary journey with our world-class restaurants offering a variety of cuisines.</p>
+            </div>
+
+          
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <h3>Spa & Wellness</h3>
+                <p>Relax and rejuvenate with our premium spa treatments and wellness programs.</p>
+            </div>
+
+           
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-calendar-alt"></i>   
+                </div>
+                <h3>Event Spaces</h3>
+                <p>Host your events in our versatile and beautifully designed event spaces, perfect for weddings, conferences, and more.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-swimming-pool"></i>
+                </div>
+                <h3>Swimming Pool</h3>
+                <p>Take a dip in our luxurious swimming pool, surrounded by stunning views and a relaxing ambiance.</p>
+            </div>
+
+           
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <h3>Concierge Service</h3>
+                <p>Our dedicated concierge team is here to assist you with all your needs, ensuring a seamless stay.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

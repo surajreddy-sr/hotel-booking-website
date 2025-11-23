@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .col {
+            flex: 1;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            display: none;
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Booking</h1>
+        <form id="flightForm">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="tripType">Trip Type</label>
+                        <select id="tripType" required>
+                            <option value="">Select trip type</option>
+                            <option value="one-way">One Way</option>
+                            <option value="round-trip">Round Trip</option>
+                            <option value="multi-city">Multi City</option>
+                        </select>
+                        <div id="tripTypeError" class="error">Please select a trip type</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="passengers">Passengers</label>
+                        <select id="passengers" required>
+                            <option value="">Number of passengers</option>
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5">5 Passengers</option>
+                            <option value="6">6 Passengers</option>
+                        </select>
+                        <div id="passengersError" class="error">Please select number of passengers</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="from">From</label>
+                        <input type="text" id="from" placeholder="City or Airport" required>
+                        <div id="fromError" class="error">Please enter departure location</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="to">To</label>
+                        <input type="text" id="to" placeholder="City or Airport" required>
+                        <div id="toError" class="error">Please enter arrival location</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="departureDate">Departure Date</label>
+                        <input type="date" id="departureDate" required>
+                        <div id="departureDateError" class="error">Please select departure date</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group" id="returnDateGroup">
+                        <label for="returnDate">Return Date</label>
+                        <input type="date" id="returnDate">
+                        <div id="returnDateError" class="error">Please select return date</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="cabinClass">Cabin Class</label>
+                <select id="cabinClass" required>
+                    <option value="">Select cabin class</option>
+                    <option value="economy">Economy</option>
+                    <option value="premium-economy">Premium Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+                <div id="cabinClassError" class="error">Please select cabin class</div>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" id="submitBtn">Search Flights</button>
+            </div>
+            
+            <div id="successMessage" class="success-message">
+                Flight search successful! Redirecting to results...
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('flightForm');
+            const tripType = document.getElementById('tripType');
+            const returnDateGroup = document.getElementById('returnDateGroup');
+            const returnDate = document.getElementById('returnDate');
+            
+            // Show/hide return date based on trip type
+            tripType.addEventListener('change', function() {
+                if (this.value === 'round-trip') {
+                    returnDateGroup.style.display = 'block';
+                    returnDate.required = true;
+                } else {
+                    returnDateGroup.style.display = 'none';
+                    returnDate.required = false;
+                }
+            });
+            
+            // Initially hide return date if not round trip
+            if (tripType.value !== 'round-trip') {
+                returnDateGroup.style.display = 'none';
+                returnDate.required = false;
+            }
+            
+            // Form validation
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Reset errors
+                document.querySelectorAll('.error').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Validate trip type
+                if (!tripType.value) {
+                    document.getElementById('tripTypeError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate passengers
+                if (!document.getElementById('passengers').value) {
+                    document.getElementById('passengersError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate from
+                if (!document.getElementById('from').value.trim()) {
+                    document.getElementById('fromError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate to
+                if (!document.getElementById('to').value.trim()) {
+                    document.getElementById('toError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate departure date
+                if (!document.getElementById('departureDate').value) {
+                    document.getElementById('departureDateError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate return date if round trip
+                if (tripType.value === 'round-trip' && !returnDate.value) {
+                    document.getElementById('returnDateError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate cabin class
+                if (!document.getElementById('cabinClass').value) {
+                    document.getElementById('cabinClassError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // If form is valid, show success and simulate submission
+                if (isValid) {
+                    document.getElementById('successMessage').style.display = 'block';
+                    form.reset();
+                    
+                    // In a real app, you would submit the form here
+                    // For demo, we'll just show success message
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Date validation - return date can't be before departure
+            returnDate.addEventListener('change', function() {
+                const departureDate = new Date(document.getElementById('departureDate').value);
+                const returnDate = new Date(this.value);
+                
+                if (returnDate < departureDate) {
+                    document.getElementById('returnDateError').textContent = 'Return date must be after departure date';
+                    document.getElementById('returnDateError').style.display = 'block';
+                    this.value = '';
+                } else {
+                    document.getElementById('returnDateError').style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
